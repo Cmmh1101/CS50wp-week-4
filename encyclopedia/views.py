@@ -13,10 +13,16 @@ def index(request):
 
 
 def entry(request, title):
-    return render(request, 'encyclopedia/entry.html', {
-        'title': title.lower(),
-        'entry': util.get_entry(title) 
-    })
+    entry = util.get_entry(title)
+    if entry is not None:
+        return render(request, 'encyclopedia/entry.html', {
+            'title': title.lower(),
+            'entry': entry 
+        })
+    else:
+        return render(request, "encyclopedia/error_page.html", {
+            "error_message": "Entry not found"
+        })
 
 def search(request):
     if request.method == "POST":
@@ -39,7 +45,21 @@ def search(request):
 
 def add_entry(request):
     if request.method == "GET":
-        return render(request, "encyclopedia/add.html", {
+        return render(request, "encyclopedia/add.html")
+    else: 
+       title: request.POST["title"].lower()
+       content: request.POST["content"] 
+       duplicatedTitle: util.get_entry(title)
+       if duplicatedTitle is not None:
+          return render(request, "encyclopedia/error_page.html", {
+            "error_message": "An entry with the same title already exists"
+           }) 
+       else:
+          util.save_entry(title, content)
+          entry = util.get_entry(title)
+          return render(request, "encyclopedia", {
+            "title": title,
+            "entry": entry
+          })
 
-    })
 
