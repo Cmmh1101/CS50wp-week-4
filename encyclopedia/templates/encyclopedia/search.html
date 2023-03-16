@@ -14,5 +14,11 @@
 {% endif %} -->
 <h1>search result</h1>
 
+    {% for entry in resultList %}
+        <li>
+            <a href="/wiki/{{entry}}">{{ entry }}</a>
+        </li>
+    {% endfor %}
+
 
 {% endblock %}
