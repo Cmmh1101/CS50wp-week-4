@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 from . import util
 
@@ -14,3 +17,14 @@ def entry(request, title):
         'title': title.capitalize(),
         'entry': util.get_entry(title) 
     })
+
+def search(request):
+    if request.method == "POST":
+        query = request.POST['q'].capitalize()
+        entry = util.get_entry(query)
+        if entry is not None:
+            return render(request,'encyclopedia/entry.html', {
+                "title": query,
+                'entry': entry
+            })
+        
