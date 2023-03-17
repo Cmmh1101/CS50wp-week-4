@@ -21,7 +21,7 @@ def entry(request, title):
         })
     else:
         return render(request, "encyclopedia/error_page.html", {
-            "error_message": "Entry not found"
+            "error_message": "Entry not founddddddd"
         })
 
 def search(request):
@@ -47,17 +47,18 @@ def add_entry(request):
     if request.method == "GET":
         return render(request, "encyclopedia/add.html")
     else: 
-       title: request.POST["title"].lower()
-       content: request.POST["content"] 
-       duplicatedTitle: util.get_entry(title)
-       if duplicatedTitle is not None:
+       data = request.POST
+       title = data.get('title')
+       content = data.get('add_content')
+       duplicated = util.get_entry(title)
+       if duplicated is not None:
           return render(request, "encyclopedia/error_page.html", {
             "error_message": "An entry with the same title already exists"
            }) 
        else:
           util.save_entry(title, content)
           entry = util.get_entry(title)
-          return render(request, "encyclopedia", {
+          return render(request, "encyclopedia/entry.html", {
             "title": title,
             "entry": entry
           })
