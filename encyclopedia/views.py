@@ -21,7 +21,7 @@ def entry(request, title):
         })
     else:
         return render(request, "encyclopedia/error_page.html", {
-            "error_message": "Entry not founddddddd"
+            "error_message": "Entry not found"
         })
 
 def search(request):
@@ -63,4 +63,6 @@ def add_entry(request):
             "entry": entry
           })
 
+def edit_entry(request):
+    return render(request, "encyclopedia/edit_entry.html")
 

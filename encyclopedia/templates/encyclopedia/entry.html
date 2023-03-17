@@ -9,6 +9,7 @@
 {% if entry %}
 <h1>{{ title }}</h1>
 <p>{{ entry }}</p>
+<a href="{% url 'edit_entry' %}">Edit</a>
 {% else %}
 <h1>page not found for your search</h1>
 {% endif %}
