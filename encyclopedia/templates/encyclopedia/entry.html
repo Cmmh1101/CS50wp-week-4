@@ -7,11 +7,15 @@
 {% block body %}
 
 {% if entry %}
-<h1>{{ title }}</h1>
-<p>{{ entry }}</p>
-<a href="{% url 'edit_entry' %}">Edit</a>
-{% else %}
-<h1>page not found for your search</h1>
+<p>{{ entry | safe }}</p>
+
+<form action="{% url 'edit_entry' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="entry_title" value="{{ title }}" />
+    <input type="submit" value="Edit" class="btn btn-warning" />
+</form>
+<!-- {% else %}
+<h1>page not found for your search</h1> -->
 {% endif %}
 
 

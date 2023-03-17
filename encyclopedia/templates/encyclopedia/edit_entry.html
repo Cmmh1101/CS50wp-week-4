@@ -3,17 +3,17 @@
 
 {% block body %}
 <h1>Edit entry</h1>
-<form action="{% url 'add_entry' %}" method="POST">
+<form action="{% url 'save_entry' %}" method="POST">
     {% csrf_token %}
   <label>Title:
-    <input type="text" placeholder="new title" name="title" />
+    <input type="text" placeholder="new title" name="title" value="{{ title }}" />
   </label>  <br />
   
   <label>Markdown Content: <br />
-    <textarea name="add_content"></textarea>
+    <textarea name="edit_content">{{ entry }}</textarea>
   </label> 
   <br />
-  <input type="submit" class="btn btn-info" value="Save" />
+  <input type="submit" class="btn btn-info" value="Edit" />
 </form>
 
 {% endblock %}
