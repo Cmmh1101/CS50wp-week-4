@@ -49,10 +49,6 @@ def search(request):
                     return render(request, 'encyclopedia/search.html', {
                     'resultList': resultList
                 })
-                else:
-                    return render(request, "encyclopedia/error_page.html", {
-                    "error_message": "An entry with the same title does not exist"
-                })
 
 def add_entry(request):
     if request.method == "GET":
