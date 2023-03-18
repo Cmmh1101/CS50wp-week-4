@@ -33,7 +33,7 @@ def entry(request, title):
 
 def search(request):
     if request.method == "POST":
-        query = request.POST['q'].lower()
+        query = request.POST['q']
         entry = get_html_entry(query)
         if entry is not None:
             return render(request,'encyclopedia/entry.html', {
@@ -46,9 +46,9 @@ def search(request):
             for entry in entries:
                 if query in entry.lower():
                     resultList.append(entry)
-                    return render(request, 'encyclopedia/search.html', {
-                    'resultList': resultList
-                })
+            return render(request, 'encyclopedia/search.html', {
+            'resultList': resultList
+            })
 
 def add_entry(request):
     if request.method == "GET":
