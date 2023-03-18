@@ -77,7 +77,7 @@ def add_entry(request):
 def edit_entry(request):
     if request.method == "POST":
         title = request.POST["entry_title"]
-        entry = get_html_entry(title)
+        entry = util.get_entry(title)
         return render(request, "encyclopedia/edit_entry.html", {
             "title": title,
             "entry": entry 
