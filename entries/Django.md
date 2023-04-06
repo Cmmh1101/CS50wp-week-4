@@ -1,4 +1,4 @@
-# Django
+# Django is AMAZING!!!
 
 ### Description
 
